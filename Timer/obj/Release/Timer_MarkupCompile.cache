@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\129\Desktop\Csharp\Timer\Timer\obj\Debug\
+C:\Users\129\Desktop\Csharp\Timer\Timer\obj\Release\
 Timer
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\129\Desktop\Csharp\Timer\Timer\App.xaml
 1219584333
 1-1789436808
@@ -16,5 +16,5 @@ C:\Users\129\Desktop\Csharp\Timer\Timer\App.xaml
 13-1310406943
 MainWindow.xaml;
 
-False
+True
 
