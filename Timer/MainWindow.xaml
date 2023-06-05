@@ -28,7 +28,7 @@
                     <MediaElement x:Name="meSound" HorizontalAlignment="Left" Height="100" Margin="472,280,0,0" VerticalAlignment="Top" Width="100" Source="alert.wav" Volume="1" MediaEnded="meSound_MediaEnded" Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="碼表" Margin="39,-1,-76,-1" RenderTransformOrigin="0.428,0.679">
+            <TabItem Header="碼表" Margin="0,-2,-37,0" RenderTransformOrigin="0.428,0.679" HorizontalAlignment="Right" Width="81">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-111,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="53*"/>
@@ -41,6 +41,23 @@
                     <Button x:Name="btnPause" Content="暫停" HorizontalAlignment="Left" Margin="521,148,0,0" VerticalAlignment="Top" Width="181" Height="56" FontWeight="Bold" FontSize="36" Click="btnPause_Click" Grid.Column="1"/>
                     <Button x:Name="btnLog" Content="紀錄" HorizontalAlignment="Left" Margin="521,222,0,0" VerticalAlignment="Top" Width="181" Height="56" FontWeight="Bold" FontSize="36" Click="btnLog_Click" Grid.Column="1"/>
                     <Button x:Name="btnStop" Content="停止並歸零" HorizontalAlignment="Left" Margin="301,301,0,0" VerticalAlignment="Top" Width="401" Height="56" FontWeight="Bold" FontSize="36" Click="btnStop_Click" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="倒數" Margin="37,-4,-77,-1" RenderTransformOrigin="0.428,0.679">
+                <Grid Background="#FFE5E5E5" Margin="0,0,-4,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="47*"/>
+                        <ColumnDefinition Width="71*"/>
+                        <ColumnDefinition Width="680*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtCountDown" Grid.Column="1" HorizontalAlignment="Left" Margin="30,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" Height="79" FontWeight="Bold" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="cmbCountHour" Grid.Column="1" HorizontalAlignment="Left" Margin="30,143,0,0" VerticalAlignment="Top" Width="78" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="cmbCountMin" Grid.Column="2" HorizontalAlignment="Left" Margin="59,143,0,0" VerticalAlignment="Top" Width="78"/>
+                    <ComboBox x:Name="cmbCountSecond" Grid.Column="2" HorizontalAlignment="Left" Margin="154,143,0,0" VerticalAlignment="Top" Width="78"/>
+                    <Button x:Name="btnCountStart" Grid.Column="1" Content="開始倒數" HorizontalAlignment="Left" Margin="30,190,0,0" VerticalAlignment="Top" Width="78" Height="59" FontWeight="Bold" FontSize="18" Click="btnCountStart_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btnCountPause" Grid.Column="2" Content="暫停" HorizontalAlignment="Left" Margin="59,190,0,0" VerticalAlignment="Top" Width="78" Height="59" FontWeight="Bold" FontSize="18" Click="btnCountPause_Click"/>
+                    <Button x:Name="btnCountStop" Grid.Column="2" Content="停止" HorizontalAlignment="Left" Margin="154,190,0,0" VerticalAlignment="Top" Width="78" Height="59" FontWeight="Bold" FontSize="18" Click="btnCountStop_Click"/>
+                    <MediaElement x:Name="meCountDown" Grid.Column="2" HorizontalAlignment="Left" Height="103" Margin="382,143,0,0" VerticalAlignment="Top" Width="100"/>
                 </Grid>
             </TabItem>
         </TabControl>

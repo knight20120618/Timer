@@ -31,6 +31,11 @@ namespace Timer
         DispatcherTimer timerStopWatch = new DispatcherTimer(); // 宣告一個「倒數計時」計時器
         Stopwatch sw = new Stopwatch();                         // 宣告一個碼表物件
 
+        DispatcherTimer timerCountDown = new DispatcherTimer(); // 宣告一個「倒數計時」計時器
+
+        bool isCountDownReset = true;                           // 用來紀錄是不是重新設定
+        TimeSpan ts;                                            // 宣告一個時間間隔變數
+
         public MainWindow()
         {
             InitializeComponent();
@@ -60,6 +65,20 @@ namespace Timer
             // 設定「碼表時間更新」計時器  
             timerStopWatch.Interval = TimeSpan.FromMilliseconds(1);        // 這個計時器設定每一個刻度為「1毫秒」
             timerStopWatch.Tick += new EventHandler(timerStopWatch_tick);  // 每一個時間刻度設定一個小程序timerStopWatch_tick
+
+            cmbCountHour.ItemsSource = hours;      // 設定小時下拉選單的內容
+            cmbCountMin.ItemsSource = minutes;     // 設定分鐘下拉選單的內容
+            cmbCountSecond.ItemsSource = minutes;  // 設定秒下拉選單的內容
+
+            cmbCountHour.SelectedIndex = -1;       // 設定小時下拉選單選擇的項目為「不選擇任何選項」
+            cmbCountMin.SelectedIndex = -1;        // 設定分鐘下拉選單選擇的項目為「不選擇任何選項」
+            cmbCountSecond.SelectedIndex = -1;     // 設定秒下拉選單選擇的項目為「不選擇任何選項」
+
+            // 設定「倒數計時」計時器  
+            timerCountDown.Interval = TimeSpan.FromSeconds(1);             // 這個計時器設定每一個刻度為1秒
+            timerCountDown.Tick += new EventHandler(timerCountDown_tick);  // 每一個時間刻度設定一個小程序timerStopWatch_tick
+
+            meCountDown.LoadedBehavior = MediaState.Stop; // 將倒數聲音預先停止
         }
 
         // timer_tick事件：每一秒執行一次
@@ -175,6 +194,53 @@ namespace Timer
                 txtStopWatchLog.Text += String.Format("第 {0} 筆紀錄：{1}", i.ToString(), StopWatchLog[i - 1] + "\n");
                 i--;
             }
+        }
+
+        // timerCountDown_tick：每一秒執行一次
+        private void timerCountDown_tick(object sender, EventArgs e)
+        {
+            txtCountDown.Text = ts.ToString("hh':'mm':'ss");    // 顯示時間
+            ts = ts.Subtract(TimeSpan.FromSeconds(1));          // 把ts時間減掉一秒
+
+            if (txtCountDown.Text == "00:00:00")
+            {
+                meCountDown.LoadedBehavior = MediaState.Play; // 播放鬧鐘聲音
+                timerCountDown.Stop();                        // 停止鬧鐘計時器
+            }
+        }
+
+        // 啟動倒數計時器按鍵
+        private void btnCountStart_Click(object sender, RoutedEventArgs e)
+        {
+            // 進行判斷，判斷是不是有按過停止計時器按鍵
+            if (isCountDownReset == true)
+            {
+                int Hour = int.Parse(cmbCountHour.SelectedItem.ToString());
+                int Min = int.Parse(cmbCountMin.SelectedItem.ToString());
+                int Sec = int.Parse(cmbCountSecond.SelectedItem.ToString());
+                ts = new TimeSpan(Hour, Min, Sec); // 設定倒數時間
+            }
+            isCountDownReset = false;
+            timerCountDown.Start();
+        }
+
+        // 暫停倒數計時器按鍵
+        private void btnCountPause_Click(object sender, RoutedEventArgs e)
+        {
+
+            timerCountDown.Stop();
+        }
+
+        // 停止計時器按鍵
+        private void btnCountStop_Click(object sender, RoutedEventArgs e)
+        {
+            meCountDown.LoadedBehavior = MediaState.Stop; // 關閉鬧鐘聲音
+            isCountDownReset = true;
+            timerCountDown.Stop();
+            txtCountDown.Text = "00:00:00";
+            cmbCountHour.SelectedIndex = -1;
+            cmbCountMin.SelectedIndex = -1;
+            cmbCountSecond.SelectedIndex = -1;
         }
     }
 }
